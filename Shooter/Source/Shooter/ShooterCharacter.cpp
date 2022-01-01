@@ -16,6 +16,11 @@ void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() has been called!"));
+
+	int MyInt{ 42 };
+	UE_LOG(LogTemp, Warning, TEXT("%d is my number"), MyInt);
+
 }
 
 // Called every frame
