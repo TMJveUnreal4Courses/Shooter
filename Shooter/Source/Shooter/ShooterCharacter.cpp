@@ -21,6 +21,20 @@ void AShooterCharacter::BeginPlay()
 	int MyInt{ 42 };
 	UE_LOG(LogTemp, Warning, TEXT("%d is my number"), MyInt);
 
+	float MyFloat{ 4.696969f };
+	UE_LOG(LogTemp, Warning, TEXT("MyFloat: %f"), MyFloat);
+
+	double MyDouble{ 5.9988 };
+	UE_LOG(LogTemp, Warning, TEXT("MyDouble: %lf"), MyDouble);
+
+	char MyChar{ 'a'};
+	UE_LOG(LogTemp, Warning, TEXT("MyChar: %c"), MyChar);
+
+	wchar_t WideChar{ L'U' };
+	UE_LOG(LogTemp, Warning, TEXT("WideChar: %lc"), WideChar);
+
+	bool MyBool{ true };
+	UE_LOG(LogTemp, Warning, TEXT("MyBool: %d"), MyBool);
 }
 
 // Called every frame
