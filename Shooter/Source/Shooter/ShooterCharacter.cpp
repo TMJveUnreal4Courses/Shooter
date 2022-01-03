@@ -2,12 +2,25 @@
 
 
 #include "ShooterCharacter.h"
+#include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Creates Camera Boom (Pulls in towards the character if theres a collision)
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+	CameraBoom->SetupAttachment(RootComponent);
+	CameraBoom->TargetArmLength = 300.f; // the camera follows the character at this distance
+	CameraBoom->bUsePawnControlRotation = true; // rotate the arm based on controller
+
+	// create a follow camera
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // attaches camera to the end of spring arm
+	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 }
 
@@ -16,25 +29,7 @@ void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() has been called!"));
-
-	int MyInt{ 42 };
-	UE_LOG(LogTemp, Warning, TEXT("%d is my number"), MyInt);
-
-	float MyFloat{ 4.696969f };
-	UE_LOG(LogTemp, Warning, TEXT("MyFloat: %f"), MyFloat);
-
-	double MyDouble{ 5.9988 };
-	UE_LOG(LogTemp, Warning, TEXT("MyDouble: %lf"), MyDouble);
-
-	char MyChar{ 'a'};
-	UE_LOG(LogTemp, Warning, TEXT("MyChar: %c"), MyChar);
-
-	wchar_t WideChar{ L'U' };
-	UE_LOG(LogTemp, Warning, TEXT("WideChar: %lc"), WideChar);
-
-	bool MyBool{ true };
-	UE_LOG(LogTemp, Warning, TEXT("MyBool: %d"), MyBool);
+	
 }
 
 // Called every frame

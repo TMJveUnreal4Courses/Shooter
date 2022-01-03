@@ -26,4 +26,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+private:
+	// Camera boom positioning camera behind the character
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* CameraBoom;
+
+	// A Camera That follows the Character
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class UCameraComponent* FollowCamera;
+
+public:
+	// returns CameraBoom subobject
+	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	// Returns FollowCamera SubObject
+	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 };
